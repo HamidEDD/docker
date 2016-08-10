@@ -82,7 +82,9 @@ func (n UsernsMode) IsPrivate() bool {
 func (n UsernsMode) Valid() bool {
 	parts := strings.Split(string(n), ":")
 	switch mode := parts[0]; mode {
-	case "", "host":
+	case "": 
+        case "host":
+		return false
 	default:
 		return false
 	}
