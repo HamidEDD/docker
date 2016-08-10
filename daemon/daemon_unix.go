@@ -506,6 +506,9 @@ func verifyPlatformContainerSettings(daemon *Daemon, hostConfig *containertypes.
 		if hostConfig.PidMode.IsHost() {
 			return warnings, fmt.Errorf("Cannot share the host PID namespace when user namespaces are enabled")
 		}
+                if hostConfig.UsernsMode.IsHost() {
+                        return warnings, fmt.Errorf("Cannot share the host's userns when user namespaces are enabled")
+                }
 		if hostConfig.ReadonlyRootfs {
 			return warnings, fmt.Errorf("Cannot use the --read-only option when user namespaces are enabled")
 		}
