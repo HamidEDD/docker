@@ -120,6 +120,12 @@ func (daemon *Daemon) create(params types.ContainerCreateConfig) (retC *containe
 		endpointsConfigs = params.NetworkingConfig.EndpointsConfig
 	}
 
+        // Make sure NetworkMode has an acceptable value. We do this to ensure
+	// backwards API compatibility.
+        container.HostConfig = runconfig.SetDefaultNetModeIfBlank(container.HostConfig)
+ 
+        container.HostConfig = runconfig.SetDefaultUsernsModeToBlank(container.HostConfig) 
+
 	if err := daemon.updateContainerNetworkSettings(container, endpointsConfigs); err != nil {
 		return nil, err
 	}
