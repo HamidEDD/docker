@@ -123,6 +123,8 @@ func (daemon *Daemon) containerStart(container *container.Container) (err error)
 	// backwards API compatibility.
 	container.HostConfig = runconfig.SetDefaultNetModeIfBlank(container.HostConfig)
 
+	container.HostConfig = runconfig.SetDefaultUsernsModeToBlank(container.HostConfig)
+
 	if err := daemon.initializeNetworking(container); err != nil {
 		return err
 	}
