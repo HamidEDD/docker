@@ -43,3 +43,12 @@ func SetDefaultUsernsModeToBlank(hc *container.HostConfig) *container.HostConfig
         }
         return hc
 }
+
+//SetDefaultUlimitsToNull changes the Ulimits in hostConfig to Null.
+func SetDefaultUlimitsToNull(hc *container.HostConfig) *container.HostConfig {
+        if hc != nil {
+                        hc.Ulimits = nil
+	//container.Ulimits(nil)
+        }
+        return hc
+}

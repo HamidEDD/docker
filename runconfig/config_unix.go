@@ -54,7 +54,12 @@ func (w *ContainerConfigWrapper) getHostConfig() *container.HostConfig {
 	// Make sure NetworkMode has an acceptable value. We do this to ensure
 	// backwards compatible API behavior.
 	hc = SetDefaultNetModeIfBlank(hc)
+	
+	// Set to Blank the default value of UsernsMode
 	hc = SetDefaultUsernsModeToBlank(hc)
+
+	// Set to Null the default value of Ulimits
+	hc = SetDefaultUlimitsToNull(hc)
 
 	return hc
 }
