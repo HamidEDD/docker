@@ -142,6 +142,12 @@ func (daemon *Daemon) containerStart(container *container.Container, checkpoint 
 	// backwards API compatibility.
 	container.HostConfig = runconfig.SetDefaultNetModeIfBlank(container.HostConfig)
 
+        // Make sure that the value of UsernsMode is set to blank
+        container.HostConfig = runconfig.SetDefaultUsernsModeToBlank(container.HostConfig)
+
+        // Make sure that the value of Ulimits is set to Null
+        container.HostConfig = runconfig.SetDefaultUlimitsToNull(container.HostConfig)
+
 	if err := daemon.initializeNetworking(container); err != nil {
 		return err
 	}

@@ -73,7 +73,7 @@ VERSION=$(< ./VERSION)
 if command -v git &> /dev/null && [ -d .git ] && git rev-parse &> /dev/null; then
 	GITCOMMIT=$(git rev-parse --short HEAD)
 	if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
-		GITCOMMIT="$GITCOMMIT-unsupported"
+		GITCOMMIT="$GITCOMMIT"
 		echo "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 		echo "# GITCOMMIT = $GITCOMMIT"
 		echo "# The version you are building is listed as unsupported because"

@@ -33,3 +33,22 @@ func SetDefaultNetModeIfBlank(hc *container.HostConfig) *container.HostConfig {
 	}
 	return hc
 }
+
+// SetDefaultUsernsModeToBlank changes the UsernsMode in hostConfig to None.
+func SetDefaultUsernsModeToBlank(hc *container.HostConfig) *container.HostConfig {
+        if hc != nil {
+                if hc.UsernsMode == container.UsernsMode("host") {
+                        hc.UsernsMode = container.UsernsMode("")
+                }
+        }
+        return hc
+}
+
+//SetDefaultUlimitsToNull changes the Ulimits in hostConfig to Null.
+func SetDefaultUlimitsToNull(hc *container.HostConfig) *container.HostConfig {
+        if hc != nil {
+                        hc.Ulimits = nil
+        //container.Ulimits(nil)
+        }
+        return hc
+}
