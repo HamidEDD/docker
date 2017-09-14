@@ -34,6 +34,23 @@ func SetDefaultNetModeIfBlank(hc *container.HostConfig) {
 	}
 }
 
+// SetDefaultUsernsModeToBlank changes the UsernsMode in hostConfig to None.
+func SetDefaultUsernsModeToBlank(hc *container.HostConfig) {
+        if hc != nil {
+                if hc.UsernsMode == container.UsernsMode("host") {
+                        hc.UsernsMode = container.UsernsMode("")
+                }
+        }
+}
+
+//SetDefaultUlimitsToNull changes the Ulimits in hostConfig to Null.
+func SetDefaultUlimitsToNull(hc *container.HostConfig) {
+        if hc != nil {
+                        hc.Ulimits = nil
+        //container.Ulimits(nil)
+        }
+}
+
 // validateNetContainerMode ensures that the various combinations of requested
 // network settings wrt container mode are valid.
 func validateNetContainerMode(c *container.Config, hc *container.HostConfig) error {

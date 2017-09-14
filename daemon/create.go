@@ -182,6 +182,12 @@ func (daemon *Daemon) create(params types.ContainerCreateConfig, managed bool) (
 	// backwards API compatibility.
 	runconfig.SetDefaultNetModeIfBlank(container.HostConfig)
 
+        // Make sure that the value of UsernsMode is set to Blank
+        runconfig.SetDefaultUsernsModeToBlank(container.HostConfig)
+
+        // Make sure that the value of Ulimits is set to Null
+        runconfig.SetDefaultUlimitsToNull(container.HostConfig)
+
 	daemon.updateContainerNetworkSettings(container, endpointsConfigs)
 	if err := daemon.Register(container); err != nil {
 		return nil, err
